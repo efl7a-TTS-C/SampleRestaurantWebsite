@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BethanysPieShop.Models.OrderItem>
+
+@{
+    ViewData["Title"] = "Order";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Pie.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+               @Html.DisplayFor(model => item.Pie.Name)
+            <td>
+                <a asp-controller="Order" asp-action="RemoveFromOrder" asp-route-pieId="@item.Pie.Id"> - </a>
+                @Html.DisplayFor(model => item.Quantity)
+                <a asp-controller="Order" asp-action="AddToOrder" asp-route-pieId="@item.Pie.Id"> + </a>
+            </td>
+            <td>
+                <a asp-controller="Order" asp-action="RemoveFromOrder" asp-route-pieId="@item.Pie.Id">Remove</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

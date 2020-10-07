@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BethanysPieShop.Models.Pie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+        <h2>Pies</h2>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                @if (item.IsInStock)
+                {
+            <div class="col-md-3 pieCard">
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    <img src="~/Content/pie.jpg" alt="Alternate Text" class="img-thumbnail" style="width: 250px; height: 250px;" />
+                    <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+
+                        @Html.DisplayFor(modelItem => item.Description)
+
+                    <h4>$@Html.DisplayFor(modelItem => item.Price)</h4>
+
+                </a>
+                <div class="addToOrder">
+                    <p class="button">
+                        <a class="btn btn-primary"
+                           asp-controller="Order"
+                           asp-action="AddToOrder"
+                           asp-route-pieId="@item.Id">Add to cart</a>
+                    </p>
+                </div>
+            </div>
+                }
+            }
+        </div>
+    
